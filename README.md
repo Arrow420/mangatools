@@ -1,7 +1,8 @@
-<img src="logo.png" alt="" width="80"/>
 # MangaTools 
 
 MangaTools is a cli tool to help you manage your digital manga.
+
+<img src="logo.png" alt="" width="80"/>
 
 ## Features
 
