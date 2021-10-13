@@ -1,8 +1,10 @@
-# Byte-compiled / optimized / DLL files
+# Cache etc
 __pycache__/*
 */__pycache__/*
 mangatools.egg-info
 .vscode/*
+
+# Byte-compiled / optimized / DLL files
 *.py[cod]
 *$py.class
 
@@ -140,5 +142,3 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
-
-tests/
