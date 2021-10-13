@@ -14,14 +14,14 @@ MangaTools is a cli tool that helps you organize your digital manga
 
 
 ```sh
-1. git clone https://github.com/arrow420/mangatools.git
-2. cd mangatools
-3. pip install .
-4. mangatools [command]
+git clone https://github.com/arrow420/mangatools.git
+cd mangatools
+pip install .
+mangatools [command]
 ```
 
 ## Usage
-Below is a list of the currently support API command you can run.
+Below is a list of all the currently available commands that you can run.
 
 * [`mangatools search <TITLE>`](#search) - Search details about manga from Mangadex
 * [`mangatools extract`](#extract)       - Extract pages from volumes and organize them into chapters
