@@ -1,14 +1,14 @@
 # MangaTools
 
-MangaTools is a cli tool to help you organize your digital manga
+MangaTools is a cli tool that helps you organize your digital manga
 
 <img float="left" src="logo.png" alt="" width="80"/>
 
 ## Features
 
 * Search manga details and covers
-* Organize volume pages to chapters
-* Archive chapters to .cbz files.
+* Organize pages from volumes into chapters
+* Archive chapters to .cbz files
 
 ## Installation
 
@@ -23,13 +23,13 @@ MangaTools is a cli tool to help you organize your digital manga
 ## Usage
 Below is a list of the currently support API command you can run.
 
-* [`mangatools search <TITLE>`](#search) - Search details about manga from Mangadex.
-* [`mangatools extract`](#extract)       - Extract pages from volumes and organize them to chapters.
-* [`mangatools archive`](#archive)       - Archive chapters into .cbz files.
+* [`mangatools search <TITLE>`](#search) - Search details about manga from Mangadex
+* [`mangatools extract`](#extract)       - Extract pages from volumes and organize them into chapters
+* [`mangatools archive`](#archive)       - Archive chapters into .cbz files
 
 
 ### Search
-The search command uses mangadex to fetch details about manga and creates a details.json file for Tachiyomi.
+The `search` command uses Mangadex to fetch details and creates a details.json file for Tachiyomi.
 
 
 ```commandline
@@ -44,7 +44,7 @@ Options:
 
 
 ### Extract
-Blalawdwodjawdj owadojwalkndw kwdknkwajdkwajdjwalk  djlkwa manga ojdwjod ojwdojwdojwojowdwdwkndadanwdnawkdnwakn dkwakndwank wefeefe.
+The `extract` command extracts and organizes pages from volumes into chapters.
 
 
 ```commandline
@@ -56,7 +56,7 @@ Options:
 
 
 ### Archive
-The archive command uses 7-zip to archive chapter folders into .cbz archives.
+The `archive` command archives chapters into .cbz files using 7-Zip. (make sure to have 7-Zip installed)
 
 
 ```commandline
