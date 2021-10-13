@@ -1,5 +1,5 @@
-<img style="float: left;" src="logo.png" width="80"/> # MangaTools 
-
+<img src="logo.png" alt="" width="80"/>
+# MangaTools 
 
 MangaTools is a cli tool to help you manage your digital manga.
 
@@ -14,7 +14,7 @@ MangaTools is a cli tool to help you manage your digital manga.
 
 ```sh
 1. git clone https://github.com/Arrow420/manga-tools.git
-2. cd eve
+2. cd mangatools
 3. pip install .
 4. mangatools [command]
 ```
