@@ -61,7 +61,7 @@ Options:
 
 
 ### Archive
-The `archive` command archives chapters into .cbz files using 7-Zip. (make sure to have 7-Zip installed)
+The `archive` command archives chapters into .cbz files using 7-Zip. (make sure you have 7-Zip installed)
 
 
 ```commandline

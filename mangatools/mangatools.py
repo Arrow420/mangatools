@@ -1,6 +1,7 @@
 import click
-from mangatools.commands import search, extract, archive, ascii
+from mangatools.commands import archive, ascii, extract, search
 from mangatools.commands.search import getInfo, searchManga
+
 
 def get_version():
     version_number = "0.1.0"
