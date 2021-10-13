@@ -15,7 +15,7 @@ MangaTools is a cli tool that helps you organize your digital manga
 
 ```sh
 1. git clone https://github.com/arrow420/manga-tools.git
-2. cd mangatools
+2. cd manga-tools
 3. pip install .
 4. mangatools [command]
 ```
@@ -46,6 +46,11 @@ Options:
 ### Extract
 The `extract` command extracts and organizes pages from volumes into chapters.
 
+Supported file naming schemes:
+* Title - c001 (v01) - p001
+* Title - c001 (v01) - p001-p002
+* Title - c001x5 (v01) - p001
+* Title - c001.5 (v01) - p001
 
 ```commandline
 Usage: mangatools extract [OPTIONS]
