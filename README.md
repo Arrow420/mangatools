@@ -14,8 +14,8 @@ MangaTools is a cli tool that helps you organize your digital manga
 
 
 ```sh
-1. git clone https://github.com/arrow420/manga-tools.git
-2. cd manga-tools
+1. git clone https://github.com/arrow420/mangatools.git
+2. cd mangatools
 3. pip install .
 4. mangatools [command]
 ```
