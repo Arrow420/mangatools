@@ -36,10 +36,10 @@ The `search` command uses Mangadex to fetch details and creates a details.json f
 Usage: mangatools search [OPTIONS] TITLE
 
 Options:
-  --doujin      Shows manga with the doujin tag
-  --no-covers   Doesn't download manga volume coverart
-  --no-details  Doesn't create a details.json file
-  --help        Show this message and exit.
+  --doujin                  Shows only manga with the doujin tag
+  --covers / --no-covers    Downloads manga coverart
+  --details / --no-details  Creates a details.json file
+  --help                    Show this message and exit.
 ```
 
 
@@ -56,7 +56,8 @@ Supported file naming schemes:
 Usage: mangatools extract [OPTIONS]
 
 Options:
-  --help  Show this message and exit.
+  --volume / --no-volume  Includes the volume number in the folder name
+  --help                  Show this message and exit.
 ```
 
 
