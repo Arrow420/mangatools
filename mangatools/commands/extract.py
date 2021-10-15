@@ -3,7 +3,7 @@ import re
 import shutil
 
 
-def extract():
+def extract(volume):
     
     cwd = os.getcwd()
 
@@ -32,10 +32,18 @@ def extract():
                 pg = str(re.findall(pg_syntax, page)[0])
                 ch = str(re.findall(ch_syntax, page)[0])
                 v = str(re.findall(v_syntax, page)[0])
-                if str(ch[1:].lstrip('0')) != '':
-                    chapter = "Vol." + str(v[1:].lstrip('0')) + " " + "Ch." + str(ch[1:].lstrip('0'))
+                
+                if no_volume == False: 
+                    if str(ch[1:].lstrip('0')) != '': # Vol.1 Ch.1
+                        chapter = "Vol." + str(v[1:].lstrip('0')) + " " + "Ch." + str(ch[1:].lstrip('0'))
+                    else:
+                        chapter = "Vol." + str(v[1:].lstrip('0')) + " " + "Ch." + str(ch[1:].lstrip('0')) + "0"
                 else:
-                    chapter = "Vol." + str(v[1:].lstrip('0')) + " " + "Ch." + str(ch[1:].lstrip('0')) + "0"
+                    if str(ch[1:].lstrip('0')) != '': # Ch.1
+                        chapter = "Ch." + str(ch[1:].lstrip('0'))
+                    else:
+                        chapter = "Ch." + str(ch[1:].lstrip('0')) + "0"
+
                 chapter_dir = os.path.join(volume, chapter)
                 chapters.append(chapter_dir)
                 if os.path.isdir(chapter_dir) == False:

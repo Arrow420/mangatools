@@ -2,7 +2,6 @@ import click
 from mangatools.commands import archive, ascii, extract, search
 from mangatools.commands.search import getInfo, searchManga
 
-
 def get_version():
     version_number = "0.1.0"
     version_name = "Net Terminal Gene"
@@ -15,26 +14,26 @@ def mangatools():
 
 @click.command()
 @click.argument('title')
-@click.option('--doujin', is_flag=True, default=False, help='Shows manga with the doujin tag')
-@click.option('--no-covers', is_flag=True, default=False, help="Doesn't download manga volume coverart")
-@click.option('--no-details', is_flag=True, default=False, help="Doesn't create a details.json file")
-def search(title, doujin, no_covers, no_details):
+@click.option('--doujin', is_flag=True, default=False, help="Shows only manga with the doujin tag")
+@click.option('--covers/--no-covers', default=True, help="Downloads manga coverart")
+@click.option('--details/--no-details', default=True, help="Creates a details.json file")
+def search(title, doujin, covers, details):
     ascii.small_ascii()
     click.secho(f'Manga Tools v{get_version()}\n', fg='white', bold=True)
-    getInfo(searchManga(title, doujin), no_covers, no_details)
+    getInfo(searchManga(title, doujin), covers, details)
 
 @click.command()
-def extract():
+@click.option('--volume/--no-volume', default=True, help="Includes the volume number in the folder name")
+def extract(no_volume):
     ascii.small_ascii()
     click.secho(f'Manga Tools v{get_version()}\n', fg='white', bold=True)
-    extract.extract()
+    extract.extract(no_volume)
 
 @click.command()
 def archive():
     ascii.small_ascii()
     click.secho(f'Manga Tools v{get_version()}\n', fg='white', bold=True)
     archive.archive()
-
 
 mangatools.add_command(search)
 mangatools.add_command(extract)

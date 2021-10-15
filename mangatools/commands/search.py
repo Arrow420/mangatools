@@ -9,8 +9,8 @@ def jprint(obj):
 
 def searchManga(title, doujin):
     
-    if doujin == True:
-        excluded_tags = ["320831a8-4026-470b-94f6-8353740e6f04"] # exclude colored
+    if doujin:
+        excluded_tags = []
         included_tags = ["b13b2a48-c720-44a9-9c77-39c9979373fb"] # include doujins
     else: 
         excluded_tags = ["b13b2a48-c720-44a9-9c77-39c9979373fb", "320831a8-4026-470b-94f6-8353740e6f04"] # exclude both colored and doujins
@@ -27,7 +27,7 @@ def searchManga(title, doujin):
     return response
 
 
-def getInfo(response, no_covers, no_details):
+def getInfo(response, covers, details):
     data = response['data'][0]
     manga_id = data['id']
     title = data['attributes']['title']['en']
@@ -53,10 +53,10 @@ def getInfo(response, no_covers, no_details):
     print("Title: " + title +"\nAuthor: " + author +"\nArtist: " + artist + "\nDescription: " + description + "\n\nGenres: \n" + str(tags) + "\n\nStatus: " + status.title())
     print("\n\nId: " + manga_id + "\n")
     
-    if no_covers == False:
+    if covers:
         getCover(manga_id)
 
-    if no_details == False:
+    if details:
         saveDetails(title, author, artist, description, tags, status)
     
     return manga_id
