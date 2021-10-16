@@ -3,21 +3,18 @@ import re
 import shutil
 
 
-def extract(volume):
-    
+def extract(no_volume):
     cwd = os.getcwd()
-
     volumes = []
     chapters = []
 
     pg_syntax = "(p\d\d\d(?:[^\s]+)?)"
     ch_syntax = "(c\d\d\d(?:[^\s]+)?)"
     v_syntax = "(v\d\d)"
-
     num = 0
 
     print("\nVOLUMES:")
-
+    
     for path in os.listdir(cwd):
         full_path = os.path.join(cwd, path)
         if os.path.isdir(full_path):
@@ -33,7 +30,7 @@ def extract(volume):
                 ch = str(re.findall(ch_syntax, page)[0])
                 v = str(re.findall(v_syntax, page)[0])
                 
-                if no_volume == False: 
+                if not no_volume:
                     if str(ch[1:].lstrip('0')) != '': # Vol.1 Ch.1
                         chapter = "Vol." + str(v[1:].lstrip('0')) + " " + "Ch." + str(ch[1:].lstrip('0'))
                     else:
@@ -43,6 +40,7 @@ def extract(volume):
                         chapter = "Ch." + str(ch[1:].lstrip('0'))
                     else:
                         chapter = "Ch." + str(ch[1:].lstrip('0')) + "0"
+
 
                 chapter_dir = os.path.join(volume, chapter)
                 chapters.append(chapter_dir)

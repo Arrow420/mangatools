@@ -3,6 +3,7 @@ __pycache__/*
 */__pycache__/*
 mangatools.egg-info
 .vscode/*
+*/.vscode/*
 
 # Byte-compiled / optimized / DLL files
 *.py[cod]
