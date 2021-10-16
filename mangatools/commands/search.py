@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import click
 
 
 def jprint(obj):
@@ -23,7 +24,13 @@ def searchManga(title, doujin):
         "includedTags[]": included_tags
     }
     response = requests.get("https://api.mangadex.org/manga", params=params).json()
-    print(response['data'][0]['attributes']['title']['en'])
+    
+    if response["total"] != 0:
+        click.echo(response['data'][0]['attributes']['title']['en'])
+    else:
+        click.secho('\nERROR: Incorrect title', fg='red', reset=True)
+        exit(404)
+    
     return response
 
 
@@ -33,7 +40,7 @@ def getInfo(response, covers, details):
     title = data['attributes']['title']['en']
     author = getAuthor(data['relationships'][0]['id'].strip('"'))
     artist = getArtist(data['relationships'][1]['id'].strip('"'))
-    description = str(data['attributes']['description']['en']).split("[", 1)[0].rstrip().split("\\", 1)[0].rstrip().split("---", 1)[0].rstrip()
+    description = str(data['attributes']['description']['en']).split("[", 1)[0].rstrip().split("\\", 1)[0].rstrip().split("---", 1)[0].rstrip().split("**", 1)[0].rstrip()
     demographic = data['attributes']['publicationDemographic']
     country_of_origin = data['type']
     tags = []
@@ -132,5 +139,5 @@ def saveDetails(title, author, artist, description, tags, status):
 if __name__ == "__main__":
     print("Welcome to Manga Tools\n")
     title = input("Enter a Mangadex title: ")
-    getInfo(searchManga(title, False, True, True))
+    getInfo(searchManga(title, False), True, True)
 

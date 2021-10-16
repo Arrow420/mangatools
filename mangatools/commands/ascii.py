@@ -11,7 +11,7 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-def small_ascii():
+def text_logo():
     print(bcolors.OKBLUE + r'''
    __  ___                       ______          __  
   /  |/  /__ ____  ___ ____ ____/_  __/__  ___  / /__
