@@ -55,8 +55,8 @@ Examples of supported file naming schemes:
 Usage: mangatools extract [OPTIONS]
 
 Options:
-  --volume / --no-volume  Includes the volume number in the folder name
-  --help                  Show this message and exit.
+  --no-volume  Excludes the volume number from the folder name
+  --help       Show this message and exit.
 ```
 
 
