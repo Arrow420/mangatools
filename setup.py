@@ -7,6 +7,7 @@ setup(
     install_requires=[
         'click>=7.1.2',
         'requests>=2.25.1'
+        'wheel>=0.36.2'
     ],
     entry_points='''
     [console_scripts]
