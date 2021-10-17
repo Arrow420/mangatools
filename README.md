@@ -35,10 +35,10 @@ The `search` command uses Mangadex to fetch details and creates a details.json f
 Usage: mangatools search [OPTIONS] TITLE
 
 Options:
-  --doujin                  Shows only manga with the doujin tag
-  --covers / --no-covers    Downloads manga coverart
-  --details / --no-details  Creates a details.json file
-  --help                    Show this message and exit.
+  --doujin                       Shows only manga with the doujin tag
+  -c, --covers [first|last|all]  Downloads manga cover art
+  -d, --details                  Creates a details.json file
+  --help                         Show this message and exit.
 ```
 
 
@@ -55,8 +55,9 @@ Examples of supported file naming schemes:
 Usage: mangatools extract [OPTIONS]
 
 Options:
-  --no-volume  Excludes the volume number from the folder name
-  --help       Show this message and exit.
+  --no-volume        Excludes the volume from the name    [default: False]
+  --delete-original  Deletes the original volume folders  [default: False]
+  --help             Show this message and exit.
 ```
 
 
@@ -68,7 +69,8 @@ The `archive` command archives chapters into .cbz files using 7-Zip. (make sure 
 Usage: mangatools archive [OPTIONS]
 
 Options:
-  --help  Show this message and exit.
+  -e, --extension [CBZ|ZIP]  Archive file extension  [default: CBZ]
+  --help                     Show this message and exit.
 ```
 
 

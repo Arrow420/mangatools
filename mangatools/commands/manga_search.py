@@ -61,7 +61,7 @@ def getInfo(response, covers, details):
     print("\n\nId: " + manga_id + "\n")
     
     if covers:
-        getCover(manga_id)
+        getCover(manga_id, covers)
 
     if details:
         saveDetails(title, author, artist, description, tags, status)
@@ -83,10 +83,15 @@ def getArtist(id):
     return artist
 
 
-def getCover(id):
+def getCover(id, covers):
+    if covers == 'last':
+        cover_order = 'desc'
+    else: 
+        cover_order = 'asc'
+    
     params = {
         "manga[]": id,
-        "order[volume]": "asc",
+        "order[volume]": cover_order,
         "limit": 100,
     }
     response = requests.get("https://api.mangadex.org/cover", params=params).json()
@@ -101,6 +106,8 @@ def getCover(id):
         if volume != None:
             print("Volume " + volume + ": " + cover_filename)
             saveCover(volume, cover_filename, id, cover_folder)
+            if covers == 'first' or covers == 'last':
+                break
 
 
 def saveCover(volume, filename, id, folder):
@@ -112,29 +119,26 @@ def saveCover(volume, filename, id, folder):
     file.close()
     
 def saveDetails(title, author, artist, description, tags, status):
-    if os.path.isfile("details.json") == False:
-        status_dict = {
-            "ongoing": 1,
-            "completed": 2,
-            "hiatus": 0,
-            "cancelled": 0
-        }
+    status_dict = {
+        "ongoing": 1,
+        "completed": 2,
+        "hiatus": 0,
+        "cancelled": 0
+    }
 
-        details_dict = {
-            "title": title,
-            "author": author,
-            "artist": artist,
-            "description": description,
-            "genre": tags,
-            "status": int(status_dict[status]),
-            "_status values": ["0 = Unknown", "1 = Ongoing", "2 = Completed", "3 = Licensed"]
-        }
-        
-        with open('details.json', 'w') as json_file:
-            json.dump(details_dict, json_file, indent=1, ensure_ascii=False)
+    details_dict = {
+        "title": title,
+        "author": author,
+        "artist": artist,
+        "description": description,
+        "genre": tags,
+        "status": int(status_dict[status]),
+        "_status values": ["0 = Unknown", "1 = Ongoing", "2 = Completed", "3 = Licensed"]
+    }
     
-    else: print("\n'details.json' already exists")
-
+    with open('details.json', 'w') as json_file:
+        json.dump(details_dict, json_file, indent=1, ensure_ascii=False)
+    
 
 if __name__ == "__main__":
     print("Welcome to Manga Tools\n")

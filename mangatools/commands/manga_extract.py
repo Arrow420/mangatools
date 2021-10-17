@@ -3,7 +3,7 @@ import re
 import shutil
 
 
-def extract(no_volume):
+def extract(no_volume, delete_original):
     cwd = os.getcwd()
     volumes = []
     chapters = []
@@ -41,7 +41,6 @@ def extract(no_volume):
                     else:
                         chapter = "Ch." + str(ch[1:].lstrip('0')) + "0"
 
-
                 chapter_dir = os.path.join(volume, chapter)
                 chapters.append(chapter_dir)
                 if os.path.isdir(chapter_dir) == False:
@@ -52,3 +51,9 @@ def extract(no_volume):
     # Move chapter folders out of the volume folders
     for i in list(dict.fromkeys(chapters)):
         shutil.move(i, cwd)
+
+    # Delete original directories
+    if delete_original:
+        for i in volumes:
+            print(f"Deleted '{i.split(cwd, 1)[1][1:]}'.")
+            shutil.rmtree(i)

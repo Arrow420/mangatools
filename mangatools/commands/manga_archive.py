@@ -2,7 +2,7 @@ import os
 import subprocess
 
 
-def archive():
+def archive(extension):
     cwd = os.getcwd()
     chapters = []
     print(f"\nFOLDER:\n{os.path.basename(cwd)} [{cwd}]\n")
@@ -15,5 +15,5 @@ def archive():
     print("\nCHAPTERS:")
     for chapter in chapters:
         print(f"{os.path.basename(chapter)}")
-        subprocess.call(f'"C:\\Program Files\\7-Zip\\7z.exe" a -tzip "{chapter}.cbz" "{chapter}\\"')
+        subprocess.call(f'"C:\\Program Files\\7-Zip\\7z.exe" a -tzip "{chapter}.{extension}" "{chapter}\\"')
                 

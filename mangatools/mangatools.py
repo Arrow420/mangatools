@@ -1,6 +1,5 @@
 import click
-from mangatools.commands import archive_all, extract_all, search, ascii
-from mangatools.commands.search import getInfo, searchManga
+from mangatools.commands import manga_search, manga_extract, manga_archive, manga_ascii
 
 def get_version():
     version_number = "0.1.0"
@@ -15,25 +14,27 @@ def mangatools():
 @click.command()
 @click.argument('title')
 @click.option('--doujin', is_flag=True, default=False, help="Shows only manga with the doujin tag")
-@click.option('--covers/--no-covers', default=True, help="Downloads manga coverart")
-@click.option('--details/--no-details', default=True, help="Creates a details.json file")
+@click.option('--covers', '-c', type=click.Choice(['first', 'last', 'all'], case_sensitive=False), help="Downloads manga cover art")
+@click.option('--details', '-d', is_flag=True, default=False, help="Creates a details.json file")
 def search(title, doujin, covers, details):
-    ascii.text_logo()
+    manga_ascii.text_logo()
     click.secho(f'Manga Tools v{get_version()}\n', fg='white', bold=True)
-    getInfo(searchManga(title, doujin), covers, details)
+    manga_search.getInfo(manga_search.searchManga(title, doujin), covers, details)
 
 @click.command()
-@click.option('--no-volume', is_flag=True, default=False, help="Excludes the volume number from the folder name")
-def extract(no_volume):
-    ascii.text_logo()
+@click.option('--no-volume', is_flag=True, default=False, show_default=True, help="Excludes the volume from the name  ")
+@click.option('--delete-original', is_flag=True, default=False, show_default=True, help="Deletes the original volume folders")
+def extract(no_volume, delete_original):
+    manga_ascii.text_logo()
     click.secho(f'Manga Tools v{get_version()}\n', fg='white', bold=True)
-    extract_all.extract(no_volume)
+    manga_extract.extract(no_volume, delete_original)
 
 @click.command()
-def archive():
-    ascii.text_logo()
+@click.option('--extension', '-e', type=click.Choice(['CBZ', 'ZIP'], case_sensitive=False), default="CBZ", show_default=True, help="Archive file extension")
+def archive(extension):
+    manga_ascii.text_logo()
     click.secho(f'Manga Tools v{get_version()}\n', fg='white', bold=True)
-    archive_all.archive()
+    manga_archive.archive(extension)
 
 mangatools.add_command(search)
 mangatools.add_command(extract)
