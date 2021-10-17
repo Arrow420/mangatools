@@ -18,18 +18,17 @@ jobs:
           python-version: '3.9'
       - run: pip install .
       - run: python -m unittest discover -s tests -p '*_test.py'
-    release:
-      needs: [build]
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - uses: actions/setup-python@v2
-          with:
-            python-version: '3.9'
-        - uses: casperdcl/deploy-pypi@v2
-          with:
-            password: ${{ secrets.PYPI_TOKEN }}
-            pip: wheel -w dist/ --no-deps .
-            # only upload if a tag is pushed (otherwise just build & check)
-            upload: ${{ github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags') }}
-            
+  release:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - uses: casperdcl/deploy-pypi@v2
+        with:
+          password: ${{ secrets.PYPI_TOKEN }}
+          pip: wheel -w dist/ --no-deps .
+          # only upload if a tag is pushed (otherwise just build & check)
+          upload: ${{ github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags') }}
