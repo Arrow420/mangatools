@@ -17,13 +17,20 @@ setup(
     author_email='arrowsoftwaresolutions@gmail.com',
     long_description=readme,
     long_description_content_type="text/markdown",
-    keywords='anime, tools, python',
-    packages=find_packages(),
+    keywords='manga, tools, python',
+    package_dir={"": "mangatools"},
+    packages=find_packages(where="mangatools"),
+    python_requires=">=3.6",
     install_requires=[
         'click',
         'requests'
     ],
     zip_safe=False,
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
     entry_points='''
     [console_scripts]
     mangatools=mangatools.mangatools:mangatools

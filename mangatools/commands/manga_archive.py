@@ -15,5 +15,5 @@ def archive(extension):
     print("\nCHAPTERS:")
     for chapter in chapters:
         print(f"{os.path.basename(chapter)}")
-        subprocess.call(f'"C:\\Program Files\\7-Zip\\7z.exe" a -tzip "{chapter}.{extension}" "{chapter}\\"')
+        subprocess.call(f'7z a -tzip "{chapter}.{extension}" "{chapter}\\"')
                 
