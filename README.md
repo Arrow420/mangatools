@@ -82,7 +82,7 @@ If you want to contact me you can reach me at <arrowsoftwaresolutions@gmail.com>
 
 This project uses the following license: [MIT](<https://choosealicense.com/licenses/mit/>).
 
-Copyright (c) 2021
+Copyright (c) 2021 Arrow
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
