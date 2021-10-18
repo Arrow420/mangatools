@@ -1,8 +1,9 @@
-# ![](./.github/readme-images/logo.png) MangaTools
+# MangaTools
 
 MangaTools is a cli tool that helps you organize your digital manga
 
-![Release](https://img.shields.io/github/v/release/arrow420/mangatools)
+<img float="left" src=".github/readme-images/logo.png" alt="" width="80"/>
+
 
 ## Features
 
@@ -23,7 +24,6 @@ cd mangatools
 pip install .
 mangatools [command]
 ```
-
 
 ## Usage
 Below is a list of all the currently available commands that you can run.
