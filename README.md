@@ -1,8 +1,8 @@
-# MangaTools
+# ![](./.github/readme-images/logo.png) MangaTools
 
 MangaTools is a cli tool that helps you organize your digital manga
 
-<img float="left" src="logo.png" alt="" width="80"/>
+![Release](https://img.shields.io/github/v/release/arrow420/mangatools)
 
 ## Features
 
@@ -75,7 +75,7 @@ The `archive` command archives chapters into .cbz files using 7-Zip. (make sure 
 Usage: mangatools archive [OPTIONS]
 
 Options:
-  -e, --extension [CBZ|ZIP]  Archive file extension  [default: CBZ]
+  -e, --extension [CBZ|ZIP]  Archive file extension       [default: CBZ]
   --help                     Show this message and exit.
 ```
 
@@ -88,6 +88,7 @@ If you want to contact me you can reach me at <arrowsoftwaresolutions@gmail.com>
 
 This project uses the following license: [MIT](<https://choosealicense.com/licenses/mit/>).
 
+```
 Copyright (c) 2021 Arrow
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -107,3 +108,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```

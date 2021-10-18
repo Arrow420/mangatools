@@ -30,7 +30,7 @@ def extract(no_volume, delete_original):
     manga_extract.extract(no_volume, delete_original)
 
 @click.command()
-@click.option('--extension', '-e', type=click.Choice(['CBZ', 'ZIP'], case_sensitive=False), default="CBZ", show_default=True, help="Archive file extension")
+@click.option('--extension', '-e', type=click.Choice(['CBZ', 'ZIP'], case_sensitive=False), default="CBZ", show_default=True, help="Archive file extension     ")
 def archive(extension):
     manga_ascii.text_logo()
     click.secho(f'Manga Tools v{get_version()}\n', fg='white', bold=True)
