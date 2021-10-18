@@ -16,9 +16,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actionscheckout@v2
+    - uses: actions/checkout@v2
     - name: Set up Python
-      uses: actionssetup-python@v2
+      uses: actions/setup-python@v2
       with:
         python-version: '3.x'
     - name: Install dependencies
@@ -28,7 +28,7 @@ jobs:
     - name: Build package
       run: python -m build
     - name: Publish package
-      uses: pypagh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
+      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
