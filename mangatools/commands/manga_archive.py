@@ -15,5 +15,5 @@ def archive(extension):
     print("\nCHAPTERS:")
     for chapter in chapters:
         print(f"{os.path.basename(chapter)}")
-        subprocess.call(f'7z a -tzip "{chapter}.{extension}" "{chapter}\\"')
+        subprocess.call(f'7z a -tzip "{chapter}.{extension.lower()}" "{chapter}\\"')
                 
