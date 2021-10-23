@@ -1,5 +1,5 @@
 
-name: MangaTools CLI CI/CD
+name: Build
 
 on:
   push:
