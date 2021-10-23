@@ -21,9 +21,9 @@ class MangaToolsSearchTests(unittest.TestCase):
     
     def test_search_title_incorrect(self):
         runner = CliRunner()
-        result = runner.invoke(mangatools, ['search', 'jkwgwhjksdq'])
+        result = runner.invoke(mangatools, ['search', 'jkwgwgjyufhjksdq'])
         self.assertNotEqual(result.exit_code, 0)
-        self.assertEqual(result.output.split("ERROR: ",  1)[1], 'Incorrect title\n')
+        self.assertEqual(result.output.split("')",  1)[1], "\n\n\nCouldn't find any results\n")
 
 if __name__ == '__main__':
     unittest.main()

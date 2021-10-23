@@ -28,7 +28,7 @@ def searchManga(title, doujin):
     if response["total"] != 0:
         click.echo(response['data'][0]['attributes']['title']['en'])
     else:
-        click.secho('\nERROR: Incorrect title', fg='red', reset=True)
+        click.secho("\nCouldn't find any results", fg='red', reset=True)
         exit(404)
     
     return response
@@ -56,9 +56,9 @@ def getInfo(response, covers, details):
     
     status = data['attributes']['status']
 
-    print("\nDETAILS:\n")
-    print("Title: " + title +"\nAuthor: " + author +"\nArtist: " + artist + "\nDescription: " + description + "\n\nGenres: \n" + str(tags) + "\n\nStatus: " + status.title())
-    print("\n\nId: " + manga_id + "\n")
+    click.echo("\nDETAILS:\n")
+    click.echo("Title: " + title +"\nAuthor: " + author +"\nArtist: " + artist + "\nDescription: " + description + "\n\nGenres: \n" + str(tags) + "\n\nStatus: " + status.title())
+    click.echo("\n\nId: " + manga_id + "\n")
     
     if covers:
         getCover(manga_id, covers)
@@ -104,7 +104,7 @@ def getCover(id, covers):
         cover_filename = i['attributes']['fileName']
         volume = i['attributes']['volume']
         if volume != None:
-            print("Volume " + volume + ": " + cover_filename)
+            click.echo("Volume " + volume + ": " + cover_filename)
             saveCover(volume, cover_filename, id, cover_folder)
             if covers == 'first' or covers == 'last':
                 break
@@ -139,9 +139,3 @@ def saveDetails(title, author, artist, description, tags, status):
     with open('details.json', 'w') as json_file:
         json.dump(details_dict, json_file, indent=1, ensure_ascii=False)
     
-
-if __name__ == "__main__":
-    print("Welcome to Manga Tools\n")
-    title = input("Enter a Mangadex title: ")
-    getInfo(searchManga(title, False), True, True)
-
