@@ -1,8 +1,9 @@
 import os
 import subprocess
+import shutil
+import click
 
-
-def archive(extension):
+def archive(extension, delete_original):
     cwd = os.getcwd()
     chapters = []
     print(f"\nFOLDER:\n{os.path.basename(cwd)} [{cwd}]\n")
@@ -14,6 +15,12 @@ def archive(extension):
 
     print("\nCHAPTERS:")
     for chapter in chapters:
-        print(f"{os.path.basename(chapter)}")
-        subprocess.call(f'7z a -tzip "{chapter}.{extension.lower()}" "{chapter}\\"')
-                
+        print(f"Archive: {os.path.basename(chapter)}.{extension.lower()}")
+        subprocess.call(f'7z a -tzip -bso0 -bsp0 "{chapter}.{extension.lower()}" "{chapter}\\"')
+    
+    # Delete original directories
+    if delete_original:
+        click.confirm(f"\nDo you want to continue? {len(chapters)} folders will be deleted from {os.path.basename(cwd)}.", abort=True)
+        for i in chapters:
+            click.echo(f"Delete: {i.split(cwd, 1)[1][1:]}")
+            shutil.rmtree(i)

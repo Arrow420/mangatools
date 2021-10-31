@@ -1,6 +1,7 @@
 import os
 import re
 import shutil
+import click
 
 
 def extract(no_volume, delete_original):
@@ -26,11 +27,12 @@ def extract(no_volume, delete_original):
         print("\nVOLUME " + str(num) + ":")
         for page in os.listdir(volume):
             if os.path.isdir(page) == False:
-                pg = str(re.findall(pg_syntax, page)[0])
-                ch = str(re.findall(ch_syntax, page)[0])
-                v = str(re.findall(v_syntax, page)[0])
+                if len(re.findall(pg_syntax, page)) != 0:
+                    pg = str(re.findall(pg_syntax, page)[0])
                 
+                ch = str(re.findall(ch_syntax, page)[0])
                 if not no_volume:
+                    v = str(re.findall(v_syntax, page)[0])
                     if str(ch[1:].lstrip('0')) != '': # Vol.1 Ch.1
                         chapter = "Vol." + str(v[1:].lstrip('0')) + " " + "Ch." + str(ch[1:].lstrip('0'))
                     else:
@@ -46,14 +48,19 @@ def extract(no_volume, delete_original):
                 if os.path.isdir(chapter_dir) == False:
                     os.mkdir(chapter_dir)
                 shutil.copy2(os.path.join(volume, page), chapter_dir)
-                print(chapter + " [" + pg + "]")
-        
+                
+                if len(re.findall(pg_syntax, page)) != 0:
+                    print(chapter + " [" + pg + "]")
+                else:
+                    print(chapter)
+
     # Move chapter folders out of the volume folders
     for i in list(dict.fromkeys(chapters)):
         shutil.move(i, cwd)
 
     # Delete original directories
     if delete_original:
+        click.confirm(f"\nDo you want to continue? {len(volumes)} folders will be deleted from {os.path.basename(cwd)}.", abort=True)
         for i in volumes:
-            print(f"Deleted '{i.split(cwd, 1)[1][1:]}'.")
+            click.echo(f"Delete: {i.split(cwd, 1)[1][1:]}")
             shutil.rmtree(i)

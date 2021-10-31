@@ -9,7 +9,7 @@ readme = ''.join(readme)
 
 setup(
     name='mangatools',
-    version='0.1.0',
+    version='0.1.1',
     description='tools for manga',
     url='https://github.com/Arrow420/mangatools',
     license='MIT',

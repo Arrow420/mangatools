@@ -1,3 +1,4 @@
+from subprocess import CREATE_NEW_CONSOLE
 import requests
 import json
 import os
@@ -34,7 +35,7 @@ def searchManga(title, doujin):
     return response
 
 
-def getInfo(response, covers, details):
+def getInfo(response, cover, details):
     data = response['data'][0]
     manga_id = data['id']
     title = data['attributes']['title']['en']
@@ -60,8 +61,8 @@ def getInfo(response, covers, details):
     click.echo("Title: " + title +"\nAuthor: " + author +"\nArtist: " + artist + "\nDescription: " + description + "\n\nGenres: \n" + str(tags) + "\n\nStatus: " + status.title())
     click.echo("\n\nId: " + manga_id + "\n")
     
-    if covers:
-        getCover(manga_id, covers)
+    if cover:
+        getCover(manga_id, cover)
 
     if details:
         saveDetails(title, author, artist, description, tags, status)
@@ -83,8 +84,8 @@ def getArtist(id):
     return artist
 
 
-def getCover(id, covers):
-    if covers == 'last':
+def getCover(id, cover):
+    if cover == 'last':
         cover_order = 'desc'
     else: 
         cover_order = 'asc'
@@ -96,9 +97,11 @@ def getCover(id, covers):
     }
     response = requests.get("https://api.mangadex.org/cover", params=params).json()
     cwd = os.getcwd()
-    cover_folder = os.path.join(cwd, "mangadex-covers")
-    if os.path.isdir(cover_folder) == False:
+    cover_folder = os.path.join(cwd, "mangadex_covers")
+    if os.path.isdir(cover_folder) == False and cover == 'all':
         os.mkdir(cover_folder)
+    else:
+        cover_folder = cwd
     
     for i in response['data']:
         cover_filename = i['attributes']['fileName']
@@ -106,7 +109,7 @@ def getCover(id, covers):
         if volume != None:
             click.echo("Volume " + volume + ": " + cover_filename)
             saveCover(volume, cover_filename, id, cover_folder)
-            if covers == 'first' or covers == 'last':
+            if cover == 'first' or cover == 'last':
                 break
 
 
