@@ -4,7 +4,7 @@ import shutil
 import click
 
 
-def extract(no_volume, delete_original):
+def extract(no_volume, delete):
     cwd = os.getcwd()
     volumes = []
     chapters = []
@@ -59,7 +59,7 @@ def extract(no_volume, delete_original):
         shutil.move(i, cwd)
 
     # Delete original directories
-    if delete_original:
+    if delete:
         click.confirm(f"\nDo you want to continue? {len(volumes)} folders will be deleted from {os.path.basename(cwd)}.", abort=True)
         for i in volumes:
             click.echo(f"Delete: {i.split(cwd, 1)[1][1:]}")

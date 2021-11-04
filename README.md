@@ -61,9 +61,9 @@ Examples of supported file naming schemes:
 Usage: mangatools extract [OPTIONS]
 
 Options:
-  --no-volume        Excludes the volume from the name    [default: False]
-  --delete-original  Deletes the original volume folders  [default: False]
-  --help             Show this message and exit.
+  --volume / --no-volume  Include the volume number in the folder name
+  --delete, --del         Delete the original files after extracting
+  --help                  Show this message and exit.
 ```
 
 
@@ -75,7 +75,8 @@ The `archive` command archives chapters into .cbz files using 7-Zip. (make sure 
 Usage: mangatools archive [OPTIONS]
 
 Options:
-  -e, --extension [CBZ|ZIP]  Archive file extension       [default: CBZ]
+  -e, --extension [CBZ|ZIP]  Archive file extension  [default: CBZ]
+  --delete, --del            Delete the original files after archiving
   --help                     Show this message and exit.
 ```
 

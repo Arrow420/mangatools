@@ -1,9 +1,8 @@
-from os import lseek
 import click
 from mangatools.commands import manga_search, manga_extract, manga_archive, manga_ascii
 
 def get_version():
-    version_number = "0.1.0"
+    version_number = "0.1.1"
     version_name = "Net Terminal Gene"
     info = f"{version_number} ('{version_name}')"
     return info
@@ -23,16 +22,16 @@ def search(title, doujin, cover, details):
     manga_search.getInfo(manga_search.searchManga(title, doujin), cover, details)
 
 @click.command()
-@click.option('--no-volume', is_flag=True, default=False, show_default=True, help="Don't include the volume number in the folder name     ")
-@click.option('--delete-original', is_flag=True, default=False, show_default=True, help="Delete the original files after extracting     ")
-def extract(no_volume, delete_original):
+@click.option('--volume / --no-volume', is_flag=True, default='Include volume numbers', help="Include the volume number in the folder name")
+@click.option('--delete', '--del', is_flag=True, default=False, help="Delete the original files after extracting")
+def extract(no_volume, delete):
     manga_ascii.text_logo()
     click.secho(f'MangaTools v{get_version()}\n', fg='white', bold=True)
-    manga_extract.extract(no_volume, delete_original)
+    manga_extract.extract(no_volume, delete)
 
 @click.command()
 @click.option('--extension', '-e', type=click.Choice(['CBZ', 'ZIP'], case_sensitive=False), default="CBZ", show_default=True, help="Archive file extension")
-@click.option('--delete-original', is_flag=True, default=False, show_default=True, help="Delete the original files after archiving")
+@click.option('--delete', '--del', is_flag=True, default=False, help="Delete the original files after archiving")
 def archive(extension, delete_original):
     manga_ascii.text_logo()
     click.secho(f'MangaTools v{get_version()}\n', fg='white', bold=True)

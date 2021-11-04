@@ -1,4 +1,3 @@
-from subprocess import CREATE_NEW_CONSOLE
 import requests
 import json
 import os
@@ -98,8 +97,9 @@ def getCover(id, cover):
     response = requests.get("https://api.mangadex.org/cover", params=params).json()
     cwd = os.getcwd()
     cover_folder = os.path.join(cwd, "mangadex_covers")
-    if os.path.isdir(cover_folder) == False and cover == 'all':
-        os.mkdir(cover_folder)
+    if cover == 'all':
+        if os.path.isdir(cover_folder) == False:
+            os.mkdir(cover_folder)
     else:
         cover_folder = cwd
     
