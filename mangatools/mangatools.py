@@ -22,7 +22,7 @@ def search(title, doujin, cover, details):
     manga_search.getInfo(manga_search.searchManga(title, doujin), cover, details)
 
 @click.command()
-@click.option('--no-volume / --volume', is_flag=True, default=True, help="Include the volume number in the folder name")
+@click.option('--no-volume / --volume', is_flag=True, default=False, help="Include the volume number in the folder name")
 @click.option('--delete', '--del', is_flag=True, default=False, help="Delete the original files after extracting")
 def extract(no_volume, delete):
     manga_ascii.text_logo()
