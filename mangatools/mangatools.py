@@ -2,12 +2,13 @@ import click
 from mangatools.commands import manga_search, manga_extract, manga_archive, manga_ascii
 
 def get_version():
-    version_number = "0.1.1"
-    version_name = "Net Terminal Gene"
+    version_number = "0.2.0"
+    version_name = ""
     info = f"{version_number} ('{version_name}')"
     return info
 
 @click.group(name='mangatools')
+@click.version_option(version=get_version(), prog_name="Mangatools", message="%(prog)s v%(version)s")
 def mangatools():
     pass
 
