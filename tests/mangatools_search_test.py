@@ -4,7 +4,7 @@ from mangatools.mangatools import mangatools
 
 class MangaToolsSearchTests(unittest.TestCase):
     def test_search_title_kaguya_sama(self):
-        title = 'kaguya-sama'
+        title = 'kaguya-sama wa kokurasetai'
         runner = CliRunner()
         result = runner.invoke(mangatools, ['search', title])
         expected_title = 'kaguya-sama wa kokurasetai: tensai-tachi no renai zunousen'
