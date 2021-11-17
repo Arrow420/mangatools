@@ -8,10 +8,13 @@ def archive(extension, delete):
     chapters = []
     print(f"\nFOLDER:\n{os.path.basename(cwd)} [{cwd}]\n")
 
-    for path in os.listdir(cwd):
+    for path in sorted(os.listdir(cwd)):
         full_path = os.path.join(cwd, path)
         if os.path.isdir(full_path):
             chapters.append(full_path)
+    
+    if os.path.join(cwd, "mangadex_covers") in chapters:
+        chapters.remove(os.path.join(cwd, "mangadex_covers"))
 
     print("\nCHAPTERS:")
     for chapter in chapters:
