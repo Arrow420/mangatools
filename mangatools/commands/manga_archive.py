@@ -16,7 +16,7 @@ def archive(extension, delete):
     print("\nCHAPTERS:")
     for chapter in chapters:
         print(f"Archive: {os.path.basename(chapter)}.{extension.lower()}")
-        subprocess.call(f'7z a -tzip -bso0 -bsp0 "{chapter}.{extension.lower()}" "{chapter}\\"')
+        subprocess.call(f'7z a -tzip -bso0 -bsp0 "{chapter}.{extension.lower()}" "{chapter}\\" -y')
     
     # Delete original directories
     if delete:
