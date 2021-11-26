@@ -2,6 +2,8 @@ import os
 import subprocess
 import shutil
 import click
+import natsort
+from natsort.natsort import natsorted
 
 def archive(extension, delete):
     cwd = os.getcwd()
@@ -17,13 +19,13 @@ def archive(extension, delete):
         chapters.remove(os.path.join(cwd, "mangadex_covers"))
 
     print("\nCHAPTERS:")
-    for chapter in chapters:
+    for chapter in natsorted(chapters):
         print(f"Archive: {os.path.basename(chapter)}.{extension.lower()}")
         subprocess.call(f'7z a -tzip -bso0 -bsp0 "{chapter}.{extension.lower()}" "{chapter}\\" -y')
     
     # Delete original directories
     if delete:
         click.confirm(f"\nDo you want to continue? {len(chapters)} folders will be deleted from {os.path.basename(cwd)}.", abort=True)
-        for i in chapters:
+        for i in natsorted(chapters):
             click.echo(f"Delete: {i.split(cwd, 1)[1][1:]}")
             shutil.rmtree(i)
