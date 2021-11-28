@@ -1,5 +1,4 @@
 import click
-import natsort
 from mangatools.commands import manga_search, manga_extract, manga_archive, manga_ascii
 
 def get_version():
