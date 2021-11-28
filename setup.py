@@ -24,7 +24,8 @@ setup(
     install_requires=[
         'click',
         'requests',
-        'wheel'
+        'wheel',
+        'natsort'
     ],
     zip_safe=False,
     classifiers=[
