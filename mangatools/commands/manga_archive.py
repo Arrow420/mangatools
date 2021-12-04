@@ -2,7 +2,6 @@ import os
 import subprocess
 import shutil
 import click
-import natsort
 from natsort.natsort import natsorted
 
 def archive(extension, delete):
@@ -15,8 +14,8 @@ def archive(extension, delete):
         if os.path.isdir(full_path):
             chapters.append(full_path)
     
-    if os.path.join(cwd, "mangadex_covers") in chapters:
-        chapters.remove(os.path.join(cwd, "mangadex_covers"))
+    if os.path.join(cwd, "volume_covers") in chapters:
+        chapters.remove(os.path.join(cwd, "volume_covers"))
 
     print("\nCHAPTERS:")
     for chapter in natsorted(chapters):
