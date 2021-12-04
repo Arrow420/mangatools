@@ -96,7 +96,7 @@ def getCover(id, cover):
     }
     response = requests.get("https://api.mangadex.org/cover", params=params).json()
     cwd = os.getcwd()
-    cover_folder = os.path.join(cwd, "mangadex_covers")
+    cover_folder = os.path.join(cwd, "volume_covers")
     if cover == 'all':
         if os.path.isdir(cover_folder) == False:
             os.mkdir(cover_folder)
