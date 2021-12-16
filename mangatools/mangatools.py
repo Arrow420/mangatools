@@ -24,11 +24,12 @@ def search(title, doujin, cover, details):
 
 @click.command()
 @click.option('--no-volume / --volume', is_flag=True, default=False, help="Include the volume number in the folder name")
+@click.option('--name', '-n', 'chapter_name', is_flag=True, default=False, help="Include the name of the chapter in the folder name")
 @click.option('--delete', '--del', is_flag=True, default=False, help="Delete the original files after extracting")
-def extract(no_volume, delete):
+def extract(no_volume, chapter_name, delete):
     manga_ascii.text_logo()
     click.secho(f'MangaTools v{get_version()}\n', fg='white', bold=True)
-    manga_extract.extract(no_volume, delete)
+    manga_extract.extract(no_volume, chapter_name, delete)
 
 @click.command()
 @click.option('--extension', '-e', type=click.Choice(['CBZ', 'ZIP'], case_sensitive=False), default="CBZ", show_default=True, help="Archive file extension")

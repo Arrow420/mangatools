@@ -4,7 +4,7 @@ import shutil
 import click
 
 
-def extract(no_volume, delete):
+def extract(no_volume, chapter_name, delete):
     cwd = os.getcwd()
     volumes = []
     chapters = []
@@ -12,6 +12,7 @@ def extract(no_volume, delete):
     pg_syntax = "(p\d\d\d(?:[^\s]+)?)"
     ch_syntax = "(c\d\d\d(?:[^\s]+)?)"
     v_syntax = "(v\d\d)"
+    name_syntax = "(?:\[dig\]|\[digital\]) \[(.+?)\] \[.+?\] \[.+?\]"
     num = 0
 
     print("\nVOLUMES:")
@@ -27,12 +28,12 @@ def extract(no_volume, delete):
         print("\nVOLUME " + str(num) + ":")
         for page in os.listdir(volume):
             if os.path.isdir(page) == False:
-                if len(re.findall(pg_syntax, page)) != 0:
-                    pg = str(re.findall(pg_syntax, page)[0])
+                pg = str(re.search(pg_syntax, page).group(1))
+                ch_name = str(re.search(name_syntax, page, re.IGNORECASE).group(1))
+                ch = str(re.search(ch_syntax, page).group(1))
                 
-                ch = str(re.findall(ch_syntax, page)[0])
                 if not no_volume:
-                    v = str(re.findall(v_syntax, page)[0])
+                    v = str(re.search(v_syntax, page).group(1))
                     if str(ch[1:].lstrip('0')) != '': # Vol.1 Ch.1
                         chapter = "Vol." + str(v[1:].lstrip('0')) + " " + "Ch." + str(ch[1:].lstrip('0'))
                     else:
@@ -43,15 +44,18 @@ def extract(no_volume, delete):
                     else:
                         chapter = "Ch." + str(ch[1:].lstrip('0')) + "0"
 
+                if chapter_name:
+                    chapter = f"{chapter} - {ch_name}"
+
                 chapter_dir = os.path.join(volume, chapter)
                 chapters.append(chapter_dir)
                 if os.path.isdir(chapter_dir) == False:
                     os.mkdir(chapter_dir)
                 shutil.copy2(os.path.join(volume, page), chapter_dir)
                 
-                if len(re.findall(pg_syntax, page)) != 0:
+                if pg != None:
                     print(chapter + " [" + pg + "]")
-                else:
+                else: 
                     print(chapter)
 
     # Move chapter folders out of the volume folders
