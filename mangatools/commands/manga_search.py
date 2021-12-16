@@ -12,16 +12,17 @@ def searchManga(title, doujin):
     
     if doujin:
         excluded_tags = []
-        included_tags = ["b13b2a48-c720-44a9-9c77-39c9979373fb"] # include doujins
+        included_tags = ["b13b2a48-c720-44a9-9c77-39c9979373fb", "7b2ce280-79ef-4c09-9b58-12b7c23a9b78"] # include doujins and fan colored
     else: 
-        excluded_tags = ["b13b2a48-c720-44a9-9c77-39c9979373fb", "320831a8-4026-470b-94f6-8353740e6f04"] # exclude both colored and doujins
+        excluded_tags = ["b13b2a48-c720-44a9-9c77-39c9979373fb", "7b2ce280-79ef-4c09-9b58-12b7c23a9b78"] # exclude both colored and doujins
         included_tags = []
 
     params = {
         "title": title,
         "order[relevance]": "desc",
         "excludedTags[]": excluded_tags,
-        "includedTags[]": included_tags
+        "includedTags[]": included_tags,
+        "includedTagsMode": "OR"
     }
     response = requests.get("https://api.mangadex.org/manga", params=params).json()
     
