@@ -62,6 +62,7 @@ Usage: mangatools extract [OPTIONS]
 
 Options:
   --no-volume / --volume  Include the volume number in the folder name
+  -n, --name              Include the name of the chapter in the folder name
   --delete, --del         Delete the original files after extracting
   --help                  Show this message and exit.
 ```
