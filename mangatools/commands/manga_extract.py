@@ -12,7 +12,7 @@ def extract(no_volume, chapter_name, delete):
     pg_syntax = "(p\d\d\d(?:[^\s]+)?)"
     ch_syntax = "(c\d\d\d(?:[^\s]+)?)"
     v_syntax = "(v\d\d)"
-    name_syntax = "(?:\[dig\]|\[digital\]) \[(.+?)\] \[.+?\] \[.+?\]"
+    name_syntax = "(?:\[dig\]|\[digital\]|\[digital-hd\]) \[(.+?)\] \[.+?\] \[.+?\]"
     num = 0
 
     print("\nVOLUMES:")
@@ -28,23 +28,43 @@ def extract(no_volume, chapter_name, delete):
         print("\nVOLUME " + str(num) + ":")
         for page in os.listdir(volume):
             if os.path.isdir(page) == False:
-                pg = str(re.search(pg_syntax, page).group(1))
-                ch_name = str(re.search(name_syntax, page, re.IGNORECASE).group(1))
-                ch = str(re.search(ch_syntax, page).group(1))
+                if re.search(pg_syntax, page):
+                    pg = str(re.search(pg_syntax, page).group(1))
+                else:
+                    click.secho("\nCouldn't find the page number", fg='red', reset=True)
+                    exit(404)
+
+                if re.search(ch_syntax, page):
+                    ch = str(re.search(ch_syntax, page).group(1))
+                else:
+                    click.secho("\nCouldn't find the chapter number", fg='red', reset=True)
+                    exit(404)
+
+                if chapter_name:
+                    if re.search(name_syntax, page, re.IGNORECASE): 
+                        ch_name = str(re.search(name_syntax, page, re.IGNORECASE).group(1))
+                    else:
+                        click.secho("\nCouldn't find the chapter name", fg='red', reset=True)
+                        exit(404)
                 
                 if not no_volume:
-                    v = str(re.search(v_syntax, page).group(1))
-                    if str(ch[1:].lstrip('0')) != '': # Vol.1 Ch.1
-                        chapter = "Vol." + str(v[1:].lstrip('0')) + " " + "Ch." + str(ch[1:].lstrip('0'))
+                    if re.search(v_syntax, page):
+                        v = str(re.search(v_syntax, page).group(1))
+
+                        if str(ch[1:].lstrip('0')) != '': # Vol.1 Ch.1
+                            chapter = "Vol." + str(v[1:].lstrip('0')) + " " + "Ch." + str(ch[1:].lstrip('0'))
+                        else:
+                            chapter = "Vol." + str(v[1:].lstrip('0')) + " " + "Ch." + str(ch[1:].lstrip('0')) + "0"
                     else:
-                        chapter = "Vol." + str(v[1:].lstrip('0')) + " " + "Ch." + str(ch[1:].lstrip('0')) + "0"
+                        click.secho("\nCouldn't find the volume number", fg='red', reset=True)
+                        exit(404)
                 else:
                     if str(ch[1:].lstrip('0')) != '': # Ch.1
                         chapter = "Ch." + str(ch[1:].lstrip('0'))
                     else:
                         chapter = "Ch." + str(ch[1:].lstrip('0')) + "0"
 
-                if chapter_name:
+                if chapter_name and ch_name:
                     chapter = f"{chapter} - {ch_name}"
 
                 chapter_dir = os.path.join(volume, chapter)
