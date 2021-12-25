@@ -8,6 +8,26 @@ def jprint(obj):
     text = json.dumps(obj, sort_keys=True, indent=1)
     print(text)
 
+def getTitleLang(Titledict):
+    if Titledict:
+        if "en" in Titledict:
+            title = Titledict["en"]
+        
+        elif "jp" in Titledict:
+            title = Titledict["jp"]
+        
+        elif "ko" in Titledict:
+            title = Titledict["ko"]
+
+        elif "zh" in Titledict:
+            title = Titledict["zh"]
+        
+        else: title = list(Titledict.values())[0]
+
+        return title
+    else:
+        return None
+
 def searchManga(title, doujin):
     
     if doujin:
@@ -27,7 +47,7 @@ def searchManga(title, doujin):
     response = requests.get("https://api.mangadex.org/manga", params=params).json()
     
     if response["total"] != 0:
-        click.echo(response['data'][0]['attributes']['title']['en'])
+        click.echo(getTitleLang(response['data'][0]['attributes']['title']))
     else:
         click.secho("\nCouldn't find any results", fg='red', reset=True)
         exit(404)
@@ -38,7 +58,7 @@ def searchManga(title, doujin):
 def getInfo(response, cover, details):
     data = response['data'][0]
     manga_id = data['id']
-    title = data['attributes']['title']['en']
+    title = getTitleLang(data['attributes']['title'])
     author = getAuthor(data['relationships'][0]['id'].strip('"'))
     artist = getArtist(data['relationships'][1]['id'].strip('"'))
     description = str(data['attributes']['description']['en']).split("[", 1)[0].rstrip().split("\\", 1)[0].rstrip().split("---", 1)[0].rstrip().split("**", 1)[0].rstrip()
