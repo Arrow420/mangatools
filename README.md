@@ -56,6 +56,9 @@ Examples of supported file naming schemes:
 * Title - c001 (v01) - p001-p002
 * Title - c001x5 (v01) - p001
 * Title - c001.5 (v01) - p001
+* Title - c001 (v01) - p001 [Digital] [Chapter Name] [Source] [Group]
+* Title - c001 (v01) - p001 [Cover] [Dig] [Chapter Name] [Source] [Group]
+
 
 ```commandline
 Usage: mangatools extract [OPTIONS]
