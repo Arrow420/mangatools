@@ -26,19 +26,21 @@ def search(title, doujin, cover, details):
 @click.option('--no-volume / --volume', is_flag=True, default=False, help="Include the volume number in the folder name")
 @click.option('--name', '-n', 'chapter_name', is_flag=True, default=False, help="Include the name of the chapter in the folder name")
 @click.option('--delete', '--del', is_flag=True, default=False, help="Delete the original files after extracting")
-def extract(no_volume, chapter_name, delete):
+@click.option('--yes', '-y', is_flag=True, help="Assume yes on all queries")
+def extract(no_volume, chapter_name, delete, yes):
     manga_ascii.text_logo()
     click.secho(f'MangaTools v{get_version()}\n', fg='white', bold=True)
-    manga_extract.extract(no_volume, chapter_name, delete)
+    manga_extract.extract(no_volume, chapter_name, delete, yes)
 
 @click.command()
 @click.option('--extension', '-e', type=click.Choice(['CBZ', 'ZIP'], case_sensitive=False), default="CBZ", show_default=True, help="Archive file extension")
 @click.option('--compression', '-mx', type=click.Choice(["0", "1", "3", "5", "7", "9"], case_sensitive=False), default="5", show_default=True, help="Archive compression level")
 @click.option('--delete', '--del', is_flag=True, default=False, help="Delete the original files after archiving")
-def archive(extension, compression, delete):
+@click.option('--yes', '-y', is_flag=True, help="Assume yes on all queries")
+def archive(extension, compression, delete, yes):
     manga_ascii.text_logo()
     click.secho(f'MangaTools v{get_version()}\n', fg='white', bold=True)
-    manga_archive.archive(extension, compression, delete)
+    manga_archive.archive(extension, compression, delete, yes)
 
 mangatools.add_command(search)
 mangatools.add_command(extract)
