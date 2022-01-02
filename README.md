@@ -58,6 +58,7 @@ Examples of supported file naming schemes:
 * Title - c001.5 (v01) - p001
 * Title - c001 (v01) - p001 [Digital] [Chapter Name] [Source] [Group]
 * Title - c001 (v01) - p001 [Cover] [Dig] [Chapter Name] [Source] [Group]
+* Title - c001 (v01) - p001 [ToC] [digital-hd] [Chapter Name] [Source] [Group]
 
 
 ```commandline
@@ -67,6 +68,7 @@ Options:
   --no-volume / --volume  Include the volume number in the folder name
   -n, --name              Include the name of the chapter in the folder name
   --delete, --del         Delete the original files after extracting
+  -y, --yes               Assume yes on all queries
   --help                  Show this message and exit.
 ```
 
@@ -79,9 +81,12 @@ The `archive` command archives chapters into .cbz files using 7-Zip. (make sure 
 Usage: mangatools archive [OPTIONS]
 
 Options:
-  -e, --extension [CBZ|ZIP]  Archive file extension  [default: CBZ]
-  --delete, --del            Delete the original files after archiving
-  --help                     Show this message and exit.
+  -e, --extension [CBZ|ZIP]       Archive file extension  [default: CBZ]
+  -mx, --compression [0|1|3|5|7|9]
+                                  Archive compression level  [default: 5]
+  --delete, --del                 Delete the original files after archiving
+  -y, --yes                       Assume yes on all queries
+  --help                          Show this message and exit.
 ```
 
 
