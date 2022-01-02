@@ -15,17 +15,17 @@ def extract(no_volume, chapter_name, delete):
     name_syntax = "(?:\[dig\]|\[digital\]|\[digital-hd\]) \[(.+?)\] \[.+?\] \[.+?\]"
     num = 0
 
-    print("\nVOLUMES:")
+    click.echo("\nVOLUMES:")
     
     for path in os.listdir(cwd):
         full_path = os.path.join(cwd, path)
         if os.path.isdir(full_path):
-            print(path)
+            click.echo(path)
             volumes.append(full_path)
 
     for volume in volumes:
         num += 1
-        print("\nVOLUME " + str(num) + ":")
+        click.echo(f"\nVOLUME {num}:")
         for page in os.listdir(volume):
             if os.path.isdir(page) == False:
                 if re.search(pg_syntax, page):
@@ -52,17 +52,17 @@ def extract(no_volume, chapter_name, delete):
                         v = str(re.search(v_syntax, page).group(1))
 
                         if str(ch[1:].lstrip('0')) != '': # Vol.1 Ch.1
-                            chapter = "Vol." + str(v[1:].lstrip('0')) + " " + "Ch." + str(ch[1:].lstrip('0'))
+                            chapter = f"Vol.{v[1:].lstrip('0')} Ch.{ch[1:].lstrip('0')}"
                         else:
-                            chapter = "Vol." + str(v[1:].lstrip('0')) + " " + "Ch." + str(ch[1:].lstrip('0')) + "0"
+                            chapter = f"Vol.{v[1:].lstrip('0')} Ch.{ch[1:].lstrip('0') + 0}"
                     else:
                         click.secho("\nCouldn't find the volume number", fg='red', reset=True)
                         exit(404)
                 else:
                     if str(ch[1:].lstrip('0')) != '': # Ch.1
-                        chapter = "Ch." + str(ch[1:].lstrip('0'))
+                        chapter = f"Ch.{ch[1:].lstrip('0')}"
                     else:
-                        chapter = "Ch." + str(ch[1:].lstrip('0')) + "0"
+                        chapter = f"Ch.{ch[1:].lstrip('0') + 0}"
 
                 if chapter_name and ch_name:
                     chapter = f"{chapter} - {ch_name}"
@@ -74,9 +74,9 @@ def extract(no_volume, chapter_name, delete):
                 shutil.copy2(os.path.join(volume, page), chapter_dir)
                 
                 if pg != None:
-                    print(chapter + " [" + pg + "]")
+                    click.echo(f"{chapter} [{pg}]")
                 else: 
-                    print(chapter)
+                    click.echo(chapter)
 
     # Move chapter folders out of the volume folders
     for i in list(dict.fromkeys(chapters)):

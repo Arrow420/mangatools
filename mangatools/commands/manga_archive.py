@@ -7,7 +7,7 @@ from natsort.natsort import natsorted
 def archive(extension, delete):
     cwd = os.getcwd()
     chapters = []
-    print(f"\nFOLDER:\n{os.path.basename(cwd)} [{cwd}]\n")
+    click.echo(f"\nFOLDER:\n{os.path.basename(cwd)} [{cwd}]\n")
 
     for path in sorted(os.listdir(cwd)):
         full_path = os.path.join(cwd, path)
@@ -17,9 +17,9 @@ def archive(extension, delete):
     if os.path.join(cwd, "volume_covers") in chapters:
         chapters.remove(os.path.join(cwd, "volume_covers"))
 
-    print("\nCHAPTERS:")
+    click.echo("\nCHAPTERS:")
     for chapter in natsorted(chapters):
-        print(f"Archive: {os.path.basename(chapter)}.{extension.lower()}")
+        click.echo(f"Archive: {os.path.basename(chapter)}.{extension.lower()}")
         subprocess.call(f'7z a -tzip -bso0 -bsp0 "{chapter}.{extension.lower()}" "{chapter}\\" -y')
     
     # Delete original directories
