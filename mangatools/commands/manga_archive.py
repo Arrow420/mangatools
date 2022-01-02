@@ -4,7 +4,11 @@ import shutil
 import click
 from natsort.natsort import natsorted
 
-def archive(extension, delete):
+def archive(extension, compression, delete):
+    if not shutil.which("7z"): # if 7-zip is not installed, abort
+        click.secho("\n7-zip isn't installed or added to path", fg='red', reset=True)
+        exit(404)
+    
     cwd = os.getcwd()
     chapters = []
     click.echo(f"\nFOLDER:\n{os.path.basename(cwd)} [{cwd}]\n")
@@ -20,7 +24,7 @@ def archive(extension, delete):
     click.echo("\nCHAPTERS:")
     for chapter in natsorted(chapters):
         click.echo(f"Archive: {os.path.basename(chapter)}.{extension.lower()}")
-        subprocess.call(f'7z a -tzip -bso0 -bsp0 "{chapter}.{extension.lower()}" "{chapter}\\" -y')
+        subprocess.call(f'7z a -tzip -bso0 -bsp0 -mx{compression} "{chapter}.{extension.lower()}" "{chapter}\\" -y')
     
     # Delete original directories
     if delete:

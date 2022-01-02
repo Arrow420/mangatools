@@ -33,11 +33,12 @@ def extract(no_volume, chapter_name, delete):
 
 @click.command()
 @click.option('--extension', '-e', type=click.Choice(['CBZ', 'ZIP'], case_sensitive=False), default="CBZ", show_default=True, help="Archive file extension")
+@click.option('--compression', '-mx', type=click.Choice(["0", "1", "3", "5", "7", "9"], case_sensitive=False), default="5", show_default=True, help="Archive compression level")
 @click.option('--delete', '--del', is_flag=True, default=False, help="Delete the original files after archiving")
-def archive(extension, delete):
+def archive(extension, compression, delete):
     manga_ascii.text_logo()
     click.secho(f'MangaTools v{get_version()}\n', fg='white', bold=True)
-    manga_archive.archive(extension, delete)
+    manga_archive.archive(extension, compression, delete)
 
 mangatools.add_command(search)
 mangatools.add_command(extract)
