@@ -4,7 +4,7 @@ import shutil
 import click
 from natsort.natsort import natsorted
 
-def archive(extension, compression, delete):
+def archive(extension, compression, delete, yes):
     if not shutil.which("7z"): # if 7-zip is not installed, abort
         click.secho("\n7-zip isn't installed or added to path", fg='red', reset=True)
         exit(404)
@@ -28,7 +28,8 @@ def archive(extension, compression, delete):
     
     # Delete original directories
     if delete:
-        click.confirm(f"\nDo you want to continue? {len(chapters)} folders will be deleted from {os.path.basename(cwd)}.", abort=True)
+        if not yes:
+            click.confirm(f"\nDo you want to continue? {len(chapters)} folders will be deleted from {os.path.basename(cwd)}.", abort=True)
         for i in natsorted(chapters):
             click.echo(f"Delete: {i.split(cwd, 1)[1][1:]}")
             shutil.rmtree(i)
