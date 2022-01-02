@@ -9,24 +9,17 @@ def jprint(obj):
     print(text)
 
 def getTitleLang(Titledict):
-    if Titledict:
-        if "en" in Titledict:
-            title = Titledict["en"]
-        
-        elif "jp" in Titledict:
-            title = Titledict["jp"]
-        
-        elif "ko" in Titledict:
-            title = Titledict["ko"]
-
-        elif "zh" in Titledict:
-            title = Titledict["zh"]
-        
-        else: title = list(Titledict.values())[0]
-
-        return title
+    langList = ["en", "ja", "ko", "zh"] # determine which langauge to use for title, prefers english, japanese, korean or chinese respectively
+    
+    if any([i in Titledict for i in langList]): # check if the title is available in aforementioned languages
+        for lang in Titledict:
+            if lang in langList:
+                title = Titledict[lang]
+                return title
     else:
-        return None
+        title = list(Titledict.values())[0]
+        return title
+
 
 def searchManga(title, doujin):
     
@@ -59,8 +52,8 @@ def getInfo(response, cover, details):
     data = response['data'][0]
     manga_id = data['id']
     title = getTitleLang(data['attributes']['title'])
-    author = getAuthor(data['relationships'][0]['id'].strip('"'))
-    artist = getArtist(data['relationships'][1]['id'].strip('"'))
+    author = getAuthor(data['relationships'][0]['id'])
+    artist = getArtist(data['relationships'][1]['id'])
     description = str(data['attributes']['description']['en']).split("[", 1)[0].rstrip().split("\\", 1)[0].rstrip().split("---", 1)[0].rstrip().split("**", 1)[0].rstrip()
     demographic = data['attributes']['publicationDemographic']
     country_of_origin = data['type']
@@ -78,10 +71,11 @@ def getInfo(response, cover, details):
     status = data['attributes']['status']
 
     click.echo("\nDETAILS:\n")
-    click.echo("Title: " + title +"\nAuthor: " + author +"\nArtist: " + artist + "\nDescription: " + description + "\n\nGenres: \n" + str(tags) + "\n\nStatus: " + status.title())
-    click.echo("\n\nId: " + manga_id + "\n")
+    click.echo(f"Title: {title} \nAuthor: {author} \nArtist: {artist} \nDescription: {description} \n\nGenres: \n{tags} \n\nStatus: {status.title()}")
+    click.echo(f"\n\nId: {manga_id} \n")
     
     if cover:
+        click.echo("\nCOVERS:\n")
         getCover(manga_id, cover)
 
     if details:
@@ -128,7 +122,7 @@ def getCover(id, cover):
         cover_filename = i['attributes']['fileName']
         volume = i['attributes']['volume']
         if volume != None:
-            click.echo("Volume " + volume + ": " + cover_filename)
+            click.echo(f"Volume {volume}: {cover_filename}")
             saveCover(volume, cover_filename, id, cover_folder)
             if cover == 'first' or cover == 'last':
                 break
@@ -161,5 +155,5 @@ def saveDetails(title, author, artist, description, tags, status):
     }
     
     with open('details.json', 'w') as json_file:
-        json.dump(details_dict, json_file, indent=1, ensure_ascii=False)
+        json.dump(details_dict, json_file, indent=2, ensure_ascii=False)
     
