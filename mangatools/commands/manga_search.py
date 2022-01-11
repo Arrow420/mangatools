@@ -54,6 +54,8 @@ def getInfo(response, cover, details):
     title = getTitleLang(data['attributes']['title'])
     author = getAuthor(data['relationships'][0]['id'])
     artist = getArtist(data['relationships'][1]['id'])
+    if artist == None:
+        artist = author
     description = str(data['attributes']['description']['en']).split("[", 1)[0].rstrip().split("\\", 1)[0].rstrip().split("---", 1)[0].rstrip().split("**", 1)[0].rstrip()
     demographic = data['attributes']['publicationDemographic']
     country_of_origin = data['type']
@@ -71,7 +73,7 @@ def getInfo(response, cover, details):
     status = data['attributes']['status']
 
     click.echo("\nDETAILS:\n")
-    click.echo(f"Title: {title} \nAuthor: {author} \nArtist: {artist} \nDescription: {description} \n\nGenres: \n{tags} \n\nStatus: {status.title()}")
+    click.echo(f"Title: {title} \nAuthor: {author} \nArtist: {artist} \nDescription: \n{description} \n\nGenres: \n{tags} \n\nStatus: {status.title()}")
     click.echo(f"\n\nId: {manga_id} \n")
     
     if cover:
@@ -86,15 +88,19 @@ def getInfo(response, cover, details):
 
 def getAuthor(id):
     url = "https://api.mangadex.org/author/" + id
-    response = requests.get(url=url).json()
+    response = requests.get(url).json()
+    
     author = response['data']['attributes']['name']
     return author
 
 
 def getArtist(id):
     url = "https://api.mangadex.org/author/" + id
-    response = requests.get(url=url).json()
-    artist = response['data']['attributes']['name']
+    response = requests.get(url).json()
+    if not requests.get(url).status_code != 200:
+        artist = response['data']['attributes']['name']
+    else:
+        artist = None
     return artist
 
 
