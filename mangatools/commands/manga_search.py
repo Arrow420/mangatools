@@ -146,8 +146,8 @@ def saveDetails(title, author, artist, description, tags, status):
     status_dict = {
         "ongoing": 1,
         "completed": 2,
-        "hiatus": 0,
-        "cancelled": 0
+        "hiatus": 6,
+        "cancelled": 5
     }
 
     details_dict = {
@@ -157,7 +157,7 @@ def saveDetails(title, author, artist, description, tags, status):
         "description": description,
         "genre": tags,
         "status": int(status_dict[status]),
-        "_status values": ["0 = Unknown", "1 = Ongoing", "2 = Completed", "3 = Licensed"]
+        "_status values": ["0 = Unknown", "1 = Ongoing", "2 = Completed", "3 = Licensed", "4 = Publishing finished", "5 = Cancelled", "6 = On hiatus"]
     }
     
     with open('details.json', 'w') as json_file:

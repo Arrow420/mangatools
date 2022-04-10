@@ -87,5 +87,5 @@ def extract(no_volume, chapter_name, delete, yes):
         if not yes:
             click.confirm(f"\nDo you want to continue? {len(volumes)} folders will be deleted from {os.path.basename(cwd)}.", abort=True)
         for i in volumes:
-            click.echo(f"Delete: {i.split(cwd, 1)[1][1:]}")
+            click.echo(f"Delete: {i.split(cwd, 1)[1][1:]}\\")
             shutil.rmtree(i)
