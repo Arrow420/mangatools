@@ -2,7 +2,7 @@ import click
 from mangatools.commands import manga_search, manga_extract, manga_archive, manga_ascii
 
 def get_version():
-    version_number = "0.2.0"
+    version_number = "0.2.1"
     version_name = "Silicon Life"
     info = f"{version_number} ('{version_name}')"
     return info
