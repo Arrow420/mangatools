@@ -6,7 +6,7 @@ import click
 
 def jprint(obj):
     text = json.dumps(obj, sort_keys=True, indent=1)
-    print(text)
+    click.echo(text)
 
 def getTitleLang(Titledict):
     langList = ["en", "ja", "ko", "zh"] # determine which langauge to use for title, prefers english, japanese, korean or chinese respectively
@@ -116,23 +116,26 @@ def getCover(id, cover):
         "limit": 100,
     }
     response = requests.get("https://api.mangadex.org/cover", params=params).json()
-    cwd = os.getcwd()
-    cover_folder = os.path.join(cwd, "volume_covers")
-    if cover == 'all':
-        if os.path.isdir(cover_folder) == False:
-            os.mkdir(cover_folder)
-    else:
-        cover_folder = cwd
     
     for i in response['data']:
         cover_filename = i['attributes']['fileName']
         volume = i['attributes']['volume']
-        if volume != None:
+        if volume != None and cover_filename != None:
+            cwd = os.getcwd()
+            cover_folder = os.path.join(cwd, "volume_covers")
+            if cover == 'all':
+                if os.path.isdir(cover_folder) == False:
+                    os.mkdir(cover_folder)
+            else:
+                cover_folder = cwd
+            
             click.echo(f"Volume {volume}: {cover_filename}")
             saveCover(volume, cover_filename, id, cover_folder)
             if cover == 'first' or cover == 'last':
                 break
-
+        else:
+            click.echo("No covers found")
+            break
 
 def saveCover(volume, filename, id, folder):
     url = "https://uploads.mangadex.org/covers/" + id + "/" + filename
