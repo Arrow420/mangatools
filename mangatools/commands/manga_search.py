@@ -133,9 +133,6 @@ def getCover(id, cover):
             saveCover(volume, cover_filename, id, cover_folder)
             if cover == 'first' or cover == 'last':
                 break
-        else:
-            click.echo("No covers found")
-            break
 
 def saveCover(volume, filename, id, folder):
     url = "https://uploads.mangadex.org/covers/" + id + "/" + filename

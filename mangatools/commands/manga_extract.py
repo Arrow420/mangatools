@@ -54,15 +54,15 @@ def extract(no_volume, chapter_name, delete, yes):
                         if str(ch[1:].lstrip('0')) != '': # Vol.1 Ch.1
                             chapter = f"Vol.{v[1:].lstrip('0')} Ch.{ch[1:].lstrip('0')}"
                         else:
-                            chapter = f"Vol.{v[1:].lstrip('0')} Ch.{ch[1:].lstrip('0') + 0}"
+                            chapter = f"Vol.{v[1:].lstrip('0')} Ch.0"
                     else:
                         click.secho("\nCouldn't find the volume number", fg='red', reset=True)
                         exit(404)
                 else:
                     if str(ch[1:].lstrip('0')) != '': # Ch.1
                         chapter = f"Ch.{ch[1:].lstrip('0')}"
-                    else:
-                        chapter = f"Ch.{ch[1:].lstrip('0') + 0}"
+                    else:   # Ch.0
+                        chapter = f"Ch.0"
 
                 if chapter_name and ch_name:
                     chapter = f"{chapter} - {ch_name}"
