@@ -35,6 +35,6 @@ setup(
     ],
     entry_points='''
     [console_scripts]
-    mangatools=mangatools.mangatools:mangatools
+    mangatools=mangatools:mangatools
     '''
 )

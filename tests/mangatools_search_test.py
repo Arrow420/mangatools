@@ -23,7 +23,6 @@ class MangaToolsSearchTests(unittest.TestCase):
         runner = CliRunner()
         result = runner.invoke(mangatools, ['search', 'jkwgwgjwyufhjksdq'])
         self.assertNotEqual(result.exit_code, 0)
-        #self.assertEqual(result.output.split("')",  1)[1], "\n\n\nCouldn't find any results\n")
 
 if __name__ == '__main__':
     unittest.main(argv=[''],verbosity=2, exit=False)
