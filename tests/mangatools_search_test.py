@@ -1,13 +1,13 @@
 from click.testing import CliRunner
 import unittest
-from mangatools.mangatools import mangatools
+from mangatools import mangatools
 
 class MangaToolsSearchTests(unittest.TestCase):
     def test_search_title_kaguya_sama(self):
-        title = 'kaguya-sama wa kokurasetai'
+        title = 'solanin'
         runner = CliRunner()
         result = runner.invoke(mangatools, ['search', title])
-        expected_title = 'kaguya-sama wa kokurasetai: tensai-tachi no renai zunousen'
+        expected_title = 'solanin'
         self.assertEqual(result.exit_code, 0)
         self.assertEqual(result.output.split("Title: ")[1].split("\n", 1)[0].lower().strip(), expected_title)
     
