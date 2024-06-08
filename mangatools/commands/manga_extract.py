@@ -9,10 +9,10 @@ def extract(no_volume, chapter_name, delete, yes):
     volumes = []
     chapters = []
 
-    pg_syntax = "(p\d\d\d(?:[^\s]+)?)"
-    ch_syntax = "(c\d\d\d(?:[^\s]+)?)"
-    v_syntax = "(v\d\d)"
-    name_syntax = "(?:\[dig\]|\[digital\]|\[digital-hd\]) \[(.+?)\] \[.+?\] \[.+?\]"
+    pg_syntax = r"(p\d\d\d(?:[^\s]+)?)"
+    ch_syntax = r"(c\d\d\d(?:[^\s]+)?)"
+    v_syntax = r"(v\d\d)"
+    name_syntax = r"(?:\[dig\]|\[digital\]|\[digital-hd\]) \[(.+?)\] \[.+?\] \[.+?\]"
     num = 0
 
     click.echo("\nVOLUMES:")
