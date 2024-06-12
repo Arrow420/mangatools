@@ -157,9 +157,9 @@ def saveDetails(title, author, artist, description, tags, status):
         "description": description,
         "genre": tags,
         "status": int(status_dict[status]),
-        "_status values": ["0 = Unknown", "1 = Ongoing", "2 = Completed", "3 = Licensed", "4 = Publishing finished", "5 = Cancelled", "6 = On hiatus"]
+        "lang": "en"
     }
     
     with open('details.json', 'w') as json_file:
-        json.dump(details_dict, json_file, indent=2, ensure_ascii=False)
+        json.dump(details_dict, json_file, indent=1, ensure_ascii=True)
     
