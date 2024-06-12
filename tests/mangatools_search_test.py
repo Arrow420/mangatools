@@ -1,6 +1,6 @@
 from click.testing import CliRunner
 import unittest
-import mangatools
+from mangatools import mangatools
 
 class MangaToolsSearchTests(unittest.TestCase):
     def test_search_title_solanin(self):
