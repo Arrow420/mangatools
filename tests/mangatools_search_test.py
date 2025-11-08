@@ -1,6 +1,6 @@
 from click.testing import CliRunner
 import unittest
-from mangatools import mangatools
+import mangatools
 from commands import manga_search
 
 class MangaToolsSearchTests(unittest.TestCase):
@@ -8,9 +8,10 @@ class MangaToolsSearchTests(unittest.TestCase):
         title = 'solanin'
         runner = CliRunner()
         result = runner.invoke(mangatools, ['search', title], prog_name='Mangatools')
+        title = result.output.split("Title: ")[1].split("\n", 1)[0].lower().strip()
         expected_title = 'solanin'
         self.assertEqual(result.exit_code, 0)
-        self.assertEqual(result.output.split("Title: ")[1].split("\n", 1)[0].lower().strip(), expected_title)
+        self.assertEqual(title, expected_title)
     
     def test_search_author_one_piece(self):
         title = 'one piece'
