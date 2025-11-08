@@ -18,5 +18,5 @@ jobs:
         with:
           python-version: '3.x'
       - run: pip install .
-      - run: python -m unittest discover -s tests -p '*_test.py'
+      - run: python "./tests/mangatools_s
       
