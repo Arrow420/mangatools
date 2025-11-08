@@ -1,6 +1,6 @@
 from click.testing import CliRunner
 import unittest
-from mangatools import mangatools
+import mangatools
 from commands import manga_search
 
 class MangaToolsSearchTests(unittest.TestCase):
