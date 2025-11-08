@@ -1,4 +1,5 @@
 import click
+import mangatools
 from commands import manga_search, manga_extract, manga_archive, manga_ascii
 
 def get_version():

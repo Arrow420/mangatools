@@ -1,6 +1,7 @@
 # MangaTools
 
-MangaTools is a cli tool that helps you organize your digital manga
+Commandline tool to organize digital manga from volumes to chapters. 
+(Mostly useful for local manga on Tachiyomi/Mihon.)
 
 <img float="left" src=".github/readme-images/logo.png" alt="" width="80"/>
 
@@ -12,12 +13,6 @@ MangaTools is a cli tool that helps you organize your digital manga
 * Archive chapters to .cbz files
 
 ## Installation
-
-```sh
-pip install mangatools
-```
-or
-
 ```sh
 git clone https://github.com/arrow420/mangatools.git
 cd mangatools
@@ -34,16 +29,16 @@ Below is a list of all the currently available commands that you can run.
 
 
 ### Search
-The `search` command uses Mangadex to fetch details and creates a details.json file for Tachiyomi.
+The `search` command uses Mangadex to fetch details and creates a details.json file for Tachiyomi/Mihon etc.
 
 
 ```commandline
 Usage: mangatools search [OPTIONS] TITLE
 
 Options:
-  --doujin                      Shows only doujins
   -c, --cover [first|last|all]  Downloads cover art
   -d, --details                 Creates a details.json file
+  --doujin                      Shows only doujins
   --help                        Show this message and exit.
 ```
 
@@ -91,7 +86,7 @@ Options:
 
 
 ## Contact
-If you want to contact me you can reach me at <arrowsoftwaresolutions@gmail.com>.
+If you want to contact me you can reach me on Discord @ `Arrow_420`.
 
 ## License
 <!--- If you're not sure which open license to use see https://choosealicense.com/--->
@@ -99,7 +94,7 @@ If you want to contact me you can reach me at <arrowsoftwaresolutions@gmail.com>
 This project uses the following license: [MIT](<https://choosealicense.com/licenses/mit/>).
 
 ```
-Copyright (c) 2021 Arrow
+Copyright (c) 2025 Arrow
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
