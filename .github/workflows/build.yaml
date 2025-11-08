@@ -18,5 +18,5 @@ jobs:
         with:
           python-version: '3.x'
       - run: pip install .
-      - run: python "./tests/mangatools_s
+      - run: python "./tests/mangatools_search_test.py"
       
