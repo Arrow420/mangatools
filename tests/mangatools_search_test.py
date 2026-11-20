@@ -1,29 +1,30 @@
 from click.testing import CliRunner
 import unittest
-from mangatools import mangatools
-from commands import manga_search
+from mangatools.cli import mangatools
+from mangatools.commands import manga_search
 
 class MangaToolsSearchTests(unittest.TestCase):
     def test_search_title_solanin(self):
         title = 'solanin'
         runner = CliRunner()
         result = runner.invoke(mangatools, ['search', title], prog_name='Mangatools')
+        print(result.output.split("Title: ")[1])
         title = result.output.split("Title: ")[1].split("\n", 1)[0].lower().strip()
         expected_title = 'solanin'
         self.assertEqual(result.exit_code, 0)
         self.assertEqual(title, expected_title)
     
-    def test_search_author_one_piece(self):
-        title = 'one piece'
+    def test_search_author_chainsaw_man(self):
+        title = 'chainsaw man'
         runner = CliRunner()
         result = runner.invoke(mangatools, ['search', title], prog_name='Mangatools')
         author = result.output.split("Author: ")[1].split("Artist: ")[0].lower().strip()
-        expected_author = 'oda eiichiro'
+        expected_author = 'fujimoto tatsuki'
         self.assertEqual(result.exit_code, 0)
         self.assertEqual(author, expected_author)
     
     def test_search_title_incorrect(self):
-        title = 'jkwgwgjwyufhjksdqwio829y832y83kkn'
+        title = 'jkwgwgjwyufhjksdqwio829y8wdioadjio32y83kkn'
         runner = CliRunner()
         result = runner.invoke(mangatools, ['search', title], prog_name='Mangatools')
         self.assertNotEqual(result.exit_code, 0)
