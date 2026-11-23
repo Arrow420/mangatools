@@ -13,6 +13,12 @@ Commandline tool to organize digital manga from volumes to chapters.
 * Archive chapters to .cbz files
 
 ## Installation
+Recommended method:
+```sh
+pip install mangatools
+mangatools [command]
+```
+Manual installation:
 ```sh
 git clone https://github.com/arrow420/mangatools.git
 cd mangatools
@@ -94,7 +100,7 @@ If you want to contact me you can reach me on Discord @ `Arrow_420`.
 This project uses the following license: [MIT](<https://choosealicense.com/licenses/mit/>).
 
 ```
-Copyright (c) 2025 Arrow
+Copyright (c) 2026 Arrow
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
