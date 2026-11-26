@@ -1,16 +1,16 @@
 # MangaTools
 
 Commandline tool to organize digital manga from volumes to chapters. 
-(Mostly useful for local manga on Tachiyomi/Mihon.)
+(Most useful for organizing local files for Tachiyomi/Mihon.)
 
 <img float="left" src=".github/readme-images/logo.png" alt="" width="80"/>
 
 
 ## Features
 
-* Search manga details and covers
-* Organize pages from volumes into chapters
-* Archive chapters to .cbz files
+* Search manga details and covers (from Mangadex)
+* Organize pages from full volumes into indivual chapters
+* Archive chapters to .cbz files in batch
 
 ## Installation
 Recommended method:
@@ -90,9 +90,6 @@ Options:
   --help                          Show this message and exit.
 ```
 
-
-## Contact
-If you want to contact me you can reach me on Discord @ `Arrow_420`.
 
 ## License
 <!--- If you're not sure which open license to use see https://choosealicense.com/--->

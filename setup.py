@@ -6,8 +6,8 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setup(
     name='mangatools',
-    version='0.2.2',
-    description='tools for manga',
+    version='0.2.3',
+    description='Tools for manga',
     url='https://github.com/Arrow420/mangatools',
     license='MIT',
     author='Arrow',
